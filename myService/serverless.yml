@@ -12,13 +12,6 @@
 # Happy Coding!
 
 service: myservice
-
-# app and org for use with dashboard.serverless.com
-#app: your-app-name
-#org: your-org-name
-
-# You can pin your service to only deploy with a specific Serverless version
-# Check out our docs for more details
 frameworkVersion: '2'
 
 provider:
@@ -29,8 +22,6 @@ package:
   exclude:
     - node_modules/**
     - .gitignore
-# In this section we configure everything for each function. For
-# tutorial we have one function
 
 functions:
   hello:
@@ -42,7 +33,36 @@ functions:
 
 plugins:
   - serverless-python-requirements
+  - serverless-create-global-dynamodb-table
 custom:
   pythonRequirements:
     dockerizePip: non-linux,
     slim: true
+
+resources:
+      Resources:
+        usersTable:
+          Type: AWS::DynamoDB::Table
+          Properties:
+            TableName: test
+            AttributeDefinitions:
+              - AttributeName: uid
+                AttributeType: S
+              - AttributeName: number1
+                AttributeType: S
+              - AttributeName: number2
+                AttributeType: S
+              - AttributeName: sum
+                AttributeType: S
+              - AttributeName: difference
+                AttributeType: S
+              - AttributeName: product
+                AttributeType: S
+              - AttributeName: quotient
+                AttributeType: S
+            KeySchema:
+              - AttributeName: uid
+                KeyType: HASH
+            ProvisionedThroughput:
+              ReadCapacityUnits: 7
+              WriteCapacityUnits: 7
