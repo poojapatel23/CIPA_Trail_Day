@@ -3,12 +3,12 @@ import json
 
 def hello(event, context):
 
-    # data = json.loads(event['body'])
+    data = json.loads(event['body'])
 
-    # number1 = data['number1']
-    # number2 = data['number2']
-    number1 = 20
-    number2 = 10
+    number1 = data['number1']
+    number2 = data['number2']
+    # number1 = 20
+    # number2 = 10
     sum = number1 + number2
     difference = number1 - number2
     product = number1 * number2
@@ -47,5 +47,3 @@ def hello(event, context):
     #
     # return response
 
-    # Use this code if you don't use the http event with the LAMBDA-PROXY
-    # integration
